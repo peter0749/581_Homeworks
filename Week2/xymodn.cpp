@@ -30,7 +30,7 @@ int modN(int x, int y, int N)
         return base;
     }
     //return -1;
-    return digit[(y-i)%(i-book[base])+1];
+    return digit[book[base]+(y-i)%(i-book[base])];
 }
 
 int main(void)
