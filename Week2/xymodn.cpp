@@ -20,7 +20,7 @@ int modN(int x, int y, int N)
     for(i=1; i<=y;i++)
     {
         base = (base*x)%N;
-        cout<<base<<endl;
+        //cout<<base<<endl;
         if(book[base]!=0) break;
         book[base] = i;
         digit[i] = base;

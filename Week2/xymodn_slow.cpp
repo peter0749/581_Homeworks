@@ -8,8 +8,9 @@ typedef long long int LL;
 int main(void)
 {
     LL A, B, M, base=1;
-
-    while(1)
+    int term;
+    cin>>term;
+    while(term--)
     {
         base=1;
         cin>>A>>B>>M;
@@ -20,7 +21,7 @@ int main(void)
             {
                 base*=A;
                 base%=M;
-                cout<<base<<endl;
+                //cout<<base<<endl;
             }
             A = A*A;
             A%=M;

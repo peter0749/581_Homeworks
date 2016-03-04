@@ -37,10 +37,13 @@ int main(void)
     CORD data[MAX];
     int maxarea;
     int i, j;
+    int foo;
     int term;
     int area;
-    while(cin >> term)
+    cin>>foo;
+    while(foo--)
     {
+        cin >> term;
         maxarea = 0;
         for(i=0;i<term;i++) cin >> data[i].x >> data[i].y;
         for(i=0;i<term;i++)
