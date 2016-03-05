@@ -1,7 +1,6 @@
 #include <iostream>
 #include <iomanip>
 #include <string>
-#include <conio.h>
 #define MAX 100001
 
 using namespace std;
@@ -9,9 +8,9 @@ using namespace std;
 int digit[MAX] = {0};
 int book[MAX] = {0};
 
-int modN(int x, int y, int N)
+int modN(int x,long long int y, int N)
 {
-    int i, base(1);
+    long long int i, base(1);
     if(x==0)    return 0;
     if(y==0)    return 1;
     //getch();cout<<"ok"<<endl;
@@ -35,8 +34,10 @@ int modN(int x, int y, int N)
 
 int main(void)
 {
+    int x, N;
     int term;
-    int x, y, N;
+
+    long long int y;
     cin>>term;
     while(term--)
     {
