@@ -20,7 +20,6 @@ typedef struct
 
 int mySTRCMP(char const *tar, char const *src)
 {
-    //int i=0;
     while((*tar)!='\0'&&(*src)!='\0')
     {
         if(tolower(*tar)>tolower(*src))   return 1;/*Ignore difference of Capital and lower case.*/
@@ -35,7 +34,7 @@ int cmpACCOUNT(const void *a, const void *b)
 {
     EMAIL *dead = (EMAIL*)a;
     EMAIL *beef = (EMAIL*)b;
-    int testACCOUNT;
+
     return mySTRCMP(dead->ACCOUNT,beef->ACCOUNT);/*Compare base on ACCOUNT*/
 }
 
@@ -43,8 +42,12 @@ int cmpDOMAIN(const void *a, const void *b)
 {
     EMAIL *dead = (EMAIL*)a;
     EMAIL *beef = (EMAIL*)b;
-    int testDOMAIN;
-    return mySTRCMP(dead->DOMAIN,beef->DOMAIN);/*Compare base on DOMAIN*/
+    int diffDOMAIN = mySTRCMP(dead->DOMAIN,beef->DOMAIN);
+
+    if(diffDOMAIN==0)
+        return mySTRCMP(dead->ACCOUNT,beef->ACCOUNT);
+
+    return diffDOMAIN;/*Compare base on DOMAIN+ACCOUNT*/
 }
 
 int account_valid(const char *head, const char *tail)
@@ -171,7 +174,7 @@ int main(void)
     {
         printf("%s@%s\n",data[i].ACCOUNT,data[i].DOMAIN);
     }
-    puts("===Sort by DOMAIN===\n");
+    puts("===Sort by DOMAIN+ACCOUNT===\n");
 
     mySORT(count,data,&cmpDOMAIN);
     for(i=0; i<count; i++)
