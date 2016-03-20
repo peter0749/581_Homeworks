@@ -28,7 +28,7 @@ int main(int argc, int *argv[])
         return -1;
     }
 
-    for(i=2;i<=argc;i++)
+    for(i=2;i<argc;i++)
     {
         sum += strtol(argv[i],&ptr,type);
     }

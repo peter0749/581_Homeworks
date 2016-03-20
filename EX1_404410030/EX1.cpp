@@ -50,23 +50,7 @@ int cmpDOMAIN(const void *a, const void *b)
     return diffDOMAIN;/*Compare base on DOMAIN+ACCOUNT*/
 }
 
-int account_valid(const char *head, const char *tail)
-{
-    char *ptr;
-    if(tail-head==0)    return F;
-    ptr = (char*)head;
-    while(ptr!=NULL&&ptr!=tail)
-    {
-        if(isalnum(*ptr)==0&&*ptr!='_'||*ptr=='.')
-        {
-            return F;
-        }
-        ptr++;
-    }
-    return T;
-}
-
-int domain_valid(const char *head, const char *tail)
+int valid(const char *head, const char *tail)
 {
     char *ptr;
     int i;
@@ -74,7 +58,7 @@ int domain_valid(const char *head, const char *tail)
 
     if(tail-head==0)    return F;/*Empty, not valid*/
     ptr=(char*)head;
-    int dot = -1;
+    //int dot = -1;
     while(ptr!=NULL&&ptr!=tail)
     {
         if(!isalnum(*ptr)&&*ptr!='_'&&*ptr!='.'&&*ptr!='-')/*Check if the character is not valid. */
@@ -88,11 +72,11 @@ int domain_valid(const char *head, const char *tail)
             {
                 if(*(ptr+diff[i])=='.')   return F;/*Check if there are double dots. */
             }
-            dot++;
+            //dot++;
         }
         ptr++;
     }
-    if(dot<0) return F;
+    //if(dot<0) return F;
     return T;
 }
 
@@ -151,7 +135,7 @@ int main(void)
         }
 
         /*Check if account is not valid*/
-        if(!account_valid(temp,toat)||!domain_valid(toat+1,temp+strlen(temp)))
+        if(!valid(temp,toat)||!valid(toat+1,temp+strlen(temp)))
         {
             printf("%s\t\t=> Not valid\n",temp);
             continue;
