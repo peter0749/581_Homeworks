@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <math.h>
 #define MAX 101
 #define ERR 1.0e-7L
 #define CHKERR 1.0e-5L

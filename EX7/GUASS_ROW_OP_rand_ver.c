@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#define MAX 101
+#include <time.h>
+#define MAX 10001
 #define ERR 1.0e-7L
 #define CHKERR 1.0e-5L
 #define f_abs( x )  ( ((x) < 0) ?  (-(x)):(x)  )
@@ -60,7 +61,7 @@ double row_op(const int n, double A[][MAX], double x[])
 
 int main(void)
 {
-    //freopen("test_out.out","w",stdout);
+    freopen("test_out.out","w",stdout);
     srand(time(NULL));
     int n, i, j;
     int counter=0;
@@ -72,48 +73,26 @@ int main(void)
         {
             for(j=0; j<n; j++)
             {
-                //scanf("%lf",&mtx[i][j]);
                 cp[i][j] = mtx[i][j] = (double)((rand()<<17|rand()<<2|rand()&3)%n);//Copy for checking
             }
         }
         for(i=0; i<n; i++)
         {
-            //scanf("%lf", &mtx[i][n]);
             cp[i][n] = mtx[i][n] = (double)((rand()<<17|rand()<<2|rand()&3)%n);//Copy for checking
-        }
-
-        for(i=0; i<n; i++)
-        {
-            for(j=0; j<=n; j++)
-                if(f_abs(mtx[i][j]) < ERR )
-                    printf("  0.0000");
-                else
-                    printf(" %7.4lf",mtx[i][j]);
-            printf("\n");
         }
 
         det = row_op(n, mtx, x);
 
-        printf("Case %d: n=%d\n\n", counter++, n);
-        for(i=0; i<n; i++)
-        {
-            for(j=0; j<=n; j++)
-                if(f_abs(mtx[i][j]) < ERR )
-                    printf("  0.0000");
-                else
-                    printf(" %7.4lf",mtx[i][j]);
-            printf("\n");
-        }
-        printf("\ndeterminant");
+        fprintf(stdout,"Case %d: n=%d\n", counter++, n);
+        fprintf(stdout,"\ndeterminant");
         if(f_abs(det) > ERR)
         {
-            printf("=%.6lf\n",det);
+            fprintf(stdout,"=%.6lf\n",det);
             for(i=0; i<n; i++)
                 if( f_abs(x[i]) < ERR )
-                    printf("  0.0000");
+                    fprintf(stdout,"x[%d] =\t0.0000\n",i);
                 else
-                    printf(" %7.4lf", x[i]);
-            printf("\n");
+                    fprintf(stdout,"x[%d] =\t%.4lf\n", i, x[i]);
 
             /*Checking*/
             for(i=0; i<n; i++)//Check the answer;
@@ -123,12 +102,12 @@ int main(void)
                     temp += (cp[i][j]*x[j]);
                 if( f_abs(temp-cp[i][n]) > CHKERR )break;
             }
-            if(i!=n) printf("Not precise!\n");
+            if(i!=n) fprintf(stderr,"Not precise!\n");
             /*End of checking*/
         }
         else
-            printf(" is zero\n");
-        printf("===============\n");
+            fprintf(stdout," is zero\n");
+        fprintf(stdout,"===============\n");
     }
     return 0;
 }
