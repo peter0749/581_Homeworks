@@ -18,11 +18,12 @@ double row_op(const int n, double A[][MAX], double x[])
     {
         if( f_abs(A[i][i]) < ERR  ) //Leading 1 is zero
         {
-            buffer = (double*)malloc(sizeof(double) * (n+1));
-            for(j=0; j<=n; j++)buffer[j] = A[i][j]; //Copy the elements for swapping
             j=i+1;
             while( j<n && f_abs(A[j][j]) < ERR )j++;// Find the row containing leading one;
             if(j==n) return 0; //no leading 1 at i-th col, det==0;
+
+            buffer = (double*)malloc(sizeof(double) * (n+1));
+            for(k=0; k<=n; k++)buffer[k] = A[i][k]; //Copy the elements for swapping
             for(k=0; k<=n; k++)  //Swap two rows;
             {
                 A[i][k] = A[j][k];
