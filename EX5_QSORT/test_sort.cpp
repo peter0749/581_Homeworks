@@ -1,6 +1,6 @@
 #include <sys/time.h>
 #include <bits/stdc++.h>
-#include "MYSORT_FINAL.h"
+#include "MYSORT_POSIX.h"
 #define MAX 1000000
 
 unsigned long long int counter = 0;
@@ -24,7 +24,8 @@ int main(void)
     struct timeval start, end;
     struct timezone start_z, end_z;
     double diff1, diff2, times;
-    int i, j, t, sum, n, sw;
+    int i, j, t, n, sw;
+    unsigned long long int sum;
     //freopen("UNIFORM.out","a",stdout);
     srand(time(NULL));
     printf("Test Case:\n1. Uniform\t2. Repeated\t3. Reversed\t4. Sorted\n");
